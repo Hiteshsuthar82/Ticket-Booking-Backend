@@ -18,6 +18,10 @@ const ticketSchema = mongoose.Schema({
     type: Number,
     required: true,
   },
+  ticketPrise: {
+    type: Number,
+    required: true,
+  },
   buyedAt: {
     type: Date,
     default: Date.now,

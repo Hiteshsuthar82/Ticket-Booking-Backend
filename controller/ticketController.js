@@ -4,10 +4,9 @@ const Ticket = require("./../model/ticketModel");
 const User = require("./../model/userModel");
 
 exports.createTicket = asyncErrorHandler(async (req, res, next) => {
-  const { userId, from, to, numberOfTickets } = req.body;
+  const { userId, from, to, numberOfTickets, ticketPrise } = req.body;
 
   const user = await User.findById(userId);
-  console.log(userId);
   
   if (!user) {
     const err = new customError(
@@ -17,7 +16,7 @@ exports.createTicket = asyncErrorHandler(async (req, res, next) => {
     return next(err);
   }
 
-  const newTicket = await Ticket.create({user:userId, from,to,numberOfTickets});
+  const newTicket = await Ticket.create({user:userId, from,to,numberOfTickets, ticketPrise});
   
   user.tickets.push(newTicket._id)
   await user.save();
