@@ -29,6 +29,10 @@ app.use(cors(corsOptions));
 app.use("/api/v1/ticket", ticketRouter);
 app.use("/api/v1/user", userRouter);
 
+app.get("/cronjob", (req, res) => {
+  res.status(200).json({ status: "success", message: "server is successfully running" });
+});
+
 app.all("*", (req, res, next) => {
   const err = new customError(
     `can't find ${req.originalUrl} on the server`,
